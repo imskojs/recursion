@@ -6,5 +6,26 @@
 // But instead we're going to implement it from scratch:
 var getElementsByClassName = function(className
 ){
-  // your code here
+  var body = document.body;
+  var result = [];
+  function getClass(array){
+    //Higher Level
+    for(var i = 0, length = array.length; i < length; i +=1){
+      if(array[i].classList && array[i].classList.contains(className)){
+        result.push(array[i]);
+      }
+      if(array[i].childNodes.length){
+        getClass(array[i].childNodes);
+      }
+    }
+  }
+  if(body.classList.contains(className)){
+    result.push(body);
+  }
+  
+  getClass(body.childNodes);
+  
+  return result;
 };
+
+
